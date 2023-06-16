@@ -11,6 +11,7 @@ const CrystalList = ({ crystals }) => {
                 name={crystal.name}
                 color={crystal.color}
                 powers={crystal.powers}
+                charge={crystal.charge}
             />
             </li>
         )
@@ -32,7 +33,8 @@ CrystalList.propTypes = {
             id: PropTypes.number.isRequired,
             name: PropTypes.string.isRequired,
             color: PropTypes.string.isRequired,
-            powers: PropTypes.string.isRequired
+            powers: PropTypes.string.isRequired,
+            charge: PropTypes.number.isRequired
         })
     )
 }

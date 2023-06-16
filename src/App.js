@@ -7,19 +7,22 @@ const crystalData = [
     id: 1,
     name: 'Amethyst',
     color: 'Purple',
-    powers: "Infinite knowledge and wisdom"
+    powers: "Infinite knowledge and wisdom",
+    charge: 5
   },
   {
     id: 2,
     name: "Tiger's Eye",
     color: "Orange",
-    powers: "Confidence and strength"
+    powers: "Confidence and strength",
+    charge: 0
   },
   {
     id: 3,
     name: "Rose Quartz",
     color: "Pink",
-    powers: "Love"
+    powers: "Love",
+    charge:1
   },
 ];
 function App() {
