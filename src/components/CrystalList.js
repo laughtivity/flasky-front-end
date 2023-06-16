@@ -2,7 +2,7 @@ import React from 'react';
 import Crystal from './Crystal';
 import PropTypes from 'prop-types';
 
-const CrystalList = ({ crystals }) => {
+const CrystalList = ({ crystals, increaseCharge, removeCrystal }) => {
     const crystalComponents = crystals.map((crystal) => {
         return (
             <li key={crystal.id}>
@@ -11,12 +11,15 @@ const CrystalList = ({ crystals }) => {
                 name={crystal.name}
                 color={crystal.color}
                 powers={crystal.powers}
-                charge={crystal.charge}
+                charges={crystal.charges}
+                increaseCharge={increaseCharge}
+                removeCrystal={removeCrystal}
             />
             </li>
         )
     });
-    
+
+
     return (
         <section>
             <h2>Crystal List</h2>
@@ -34,7 +37,7 @@ CrystalList.propTypes = {
             name: PropTypes.string.isRequired,
             color: PropTypes.string.isRequired,
             powers: PropTypes.string.isRequired,
-            charge: PropTypes.number.isRequired
+            charges: PropTypes.number.isRequired
         })
     )
 }
