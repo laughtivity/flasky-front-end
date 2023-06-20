@@ -19,7 +19,7 @@ const Crystal = ({ id, name, color, powers, charges, increaseCharge, removeCryst
             <p>{powers}</p>
             {/* need to pass a function so it does not become undefined */}
             {/* need anonymous function to pass the event along with calling the function */}
-            <button onClick = {() => increaseCharge(id)}>Change Crystal</button>
+            <button onClick = {() => increaseCharge(id)}>Charge Crystal</button>
             <p>You've charged {name} crystal {charges} times!</p>
             <button onClick = {() => removeCrystal(id)}>Remove Crystal</button>
 

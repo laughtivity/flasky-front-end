@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import './App.css';
 import CrystalList from './components/CrystalList';
+import axios from 'axios'
 
 const crystalData = [
   {
@@ -30,16 +31,23 @@ function App() {
   // changes
   const [crystals, setCrystals] = useState(crystalData)
 
-  const increaseCharge = (id) => (
-    setCrystals(prevCrystals => {
-      const updatedCrystals = prevCrystals.map(crystal => {
-        // condition ? value to return if condition is met 
-        // : is what happens if the condition is not met 
-        // returns the updated crystal object or the original crystal object
-        return crystal.id === id ? {...crystal, charges:crystal.charges+1} : crystal
-      })
+  React.useEffect(() => {
+    axios.get(`http://127.0.0.1:5000/crystals`).then(resp => {
+      setCrystals(resp.data)
+    })
+  }, [])
 
-      return updatedCrystals
+  const increaseCharge = (id) => (
+    axios.patch(`http://127.0.0.1:5000/crystals/${id}`).then(resp => {
+      setCrystals(prevCrystals => {
+        const updatedCrystals = prevCrystals.map(crystal => {
+          // condition ? value to return if condition is met 
+          // : is what happens if the condition is not met 
+          // returns the updated crystal object or the original crystal object
+          return crystal.id === id ? resp.data : crystal
+        })
+        return updatedCrystals
+      })
     })
   )
 
@@ -52,13 +60,15 @@ function App() {
   }
 
   const removeCrystal = (id) => {
-    setCrystals(prevCrystals => {
-      // filter returns a new array and bypass needing to updated all other
-      // crystals. Filter will only put the crystla in the array if it does not
-      // equal the crystal with the id passed
-      const updatedCrystals = prevCrystals.filter(crystal => crystal.id !== id)
-      // returns the filtered crystal list
-      return updatedCrystals
+    axios.delete(`http://127.0.0.1:5000/crystals/${id}`).then(() => {
+      setCrystals(prevCrystals => {
+        // filter returns a new array and bypass needing to updated all other
+        // crystals. Filter will only put the crystla in the array if it does not
+        // equal the crystal with the id passed
+        const updatedCrystals = prevCrystals.filter(crystal => crystal.id !== id)
+        // returns the filtered crystal list
+        return updatedCrystals
+      })
     })
   }
 
